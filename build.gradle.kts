@@ -6,12 +6,20 @@ plugins {
 
 group = "com.flipperplz"
 version = "1.0-SNAPSHOT"
+
 repositories {
     mavenCentral()
 }
 
 dependencies {
     implementation(project(":bisutils-jvm"))
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.7.20")
+}
+
+subprojects {
+    apply(plugin = "java")
+    apply(plugin = "org.jetbrains.kotlin.jvm")
+
 }
 
 // Configure Gradle IntelliJ Plugin
