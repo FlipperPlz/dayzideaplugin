@@ -20,7 +20,6 @@ class DayZ_PboHandler(path: String) : ArchiveHandler(path) {
         handle.release()
         return myAccessorCache[this]
     }
-
     override fun createEntriesMap(): MutableMap<String, EntryInfo> = getPboFileHandle().use {
         val pbo = it.get(); val map = HashMap<String, EntryInfo>()
         map[""] = createRootEntry()
@@ -32,13 +31,11 @@ class DayZ_PboHandler(path: String) : ArchiveHandler(path) {
         }
         map
     }
-
     override fun contentsToByteArray(relativePath: String): ByteArray = getPboFileHandle().use { pboResourceHandle ->
         val pbo = pboResourceHandle.get();
         return pbo.getEntryData(pbo.getWrittenDataEntries().firstOrNull { it.entryPath.equals(relativePath)} ?:
         throw Exception("Failed to find $relativePath in pbo file!"), false)
     }
-
     companion object {
         private val myAccessorCache = object : FileAccessorCache<PboHandler, PboFile>(20, 10) {
             override fun disposeAccessor(fileAccessor: PboFile) {}

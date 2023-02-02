@@ -1,15 +1,14 @@
 package com.flipperplz.dayzidea.vfs
 
-import com.intellij.icons.AllIcons
-import com.intellij.openapi.fileTypes.FileType
-import javax.swing.Icon
+import com.intellij.ide.highlighter.ArchiveFileType
 
 typealias PboFileType = DayZ_PboFileType;
-object DayZ_PboFileType : FileType {
-    override fun getName(): String = "PBO"
-    override fun getDescription(): String = "PBO Archive"
+class DayZ_PboFileType : ArchiveFileType() {
     override fun getDefaultExtension(): String = "pbo"
-    override fun getIcon(): Icon = AllIcons.FileTypes.Archive
-    override fun isBinary(): Boolean = true
-    override fun isReadOnly(): Boolean = true
+    override fun getDisplayName(): String = "PBO Archive"
+    override fun getDescription(): String = "An archive format created by Bohemia Interactive, used for Arma and DayZ games"
+    override fun getName(): String = "PBO"
+    companion object {
+        val instance = PboFileType()
+    }
 }

@@ -2,8 +2,6 @@ package com.flipperplz.dayzidea.vfs
 
 import com.flipperplz.dayzidea.DAYZ_PBO_PROTOCOL
 import com.flipperplz.dayzidea.DAYZ_PBO_SEPARATOR
-import com.intellij.icons.AllIcons
-import com.intellij.openapi.fileTypes.FileType
 import com.intellij.openapi.fileTypes.FileTypeRegistry
 import com.intellij.openapi.util.text.StringUtil
 import com.intellij.openapi.vfs.VirtualFile
@@ -14,7 +12,7 @@ import com.intellij.openapi.vfs.newvfs.VfsImplUtil
 
 typealias PboFilesystem = DayZ_PboFilesystem
 class DayZ_PboFilesystem : ArchiveFileSystem() {
-    override fun isCorrectFileType(local: VirtualFile): Boolean = FileTypeRegistry.getInstance().getFileTypeByFileName(local.name) == PboFileType
+    override fun isCorrectFileType(local: VirtualFile): Boolean = FileTypeRegistry.getInstance().getFileTypeByFileName(local.name) == PboFileType.instance
     override fun getProtocol(): String = DAYZ_PBO_PROTOCOL
     override fun findFileByPath(path: String): VirtualFile? = VfsImplUtil.findFileByPath(this, path)
     override fun refresh(asynchronous: Boolean) = VfsImplUtil.refresh(this, asynchronous)
@@ -28,7 +26,7 @@ class DayZ_PboFilesystem : ArchiveFileSystem() {
         else return normalizedPath.substring(0, this + DAYZ_PBO_SEPARATOR.length)
     }
     companion object {
-        val instance: PboFilesystem
-            get() = VirtualFileManager.getInstance().getFileSystem(DAYZ_PBO_PROTOCOL) as PboFilesystem;
+        val instance: PboFilesystem get() = VirtualFileManager.getInstance().getFileSystem(DAYZ_PBO_PROTOCOL) as PboFilesystem
+
     }
 }

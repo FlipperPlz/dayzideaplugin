@@ -16,7 +16,27 @@
 
     <!-- Extension points defined by the plugin.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+    <actions>
+        <action class="com.flipperplz.dayzidea.actions.DayZ_PboTestAction"
+                id="pbotest"
+                text="PBO Test Action"
+                description="PBO test action"
+                >
+            <add-to-group group-id="HelpMenu" anchor="first"/>
+        </action>
+    </actions>
+
+
     <extensions defaultExtensionNs="com.intellij">
+
+        <fileType name="PBO"
+                  implementationClass="com.flipperplz.dayzidea.vfs.DayZ_PboFileType"
+                  fieldName="instance" extensions="pbo"
+        />
+        <virtualFileSystem
+            implementationClass="com.flipperplz.dayzidea.vfs.DayZ_PboFilesystem"
+            id="pbo" physical="true"
+        />
 
     </extensions>
 </idea-plugin>
